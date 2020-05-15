@@ -12,7 +12,7 @@ quake = Spell("Quake", 18, 180, "Black")
 cure = Spell("Cure", 12, 120, "White")
 cura = Spell("Cura", 18, 200, "White")
 
-
+# DECLARATION OF THE PLAYERS
 player = Person(460, 65, 60, 39, [fire, thunder, blizzard, cure, cura])  # hp, mp, atk, df, magic
 enemy = Person(1200, 50, 35, 25, [])
 
