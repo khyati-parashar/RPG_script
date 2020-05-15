@@ -25,9 +25,7 @@ while running:
         dmg = player.generate_damage()
         enemy.take_damage(dmg)
         print()
-        print("You attacked enemy for " + bcolors.BOLD + bcolors.FAIL + str(
-            dmg) + bcolors.ENDC + " points of damage.\nEnemy HEALTH POINTS: " + bcolors.BOLD + bcolors.FAIL + str(
-            enemy.get_hp()) + bcolors.ENDC)
+        print("You attacked enemy for " + bcolors.BOLD + bcolors.FAIL + str(dmg) + bcolors.ENDC + " points of damage.")
         print()
 
     elif index == 1:
@@ -51,10 +49,14 @@ while running:
 
     enemy_dmg = enemy.generate_damage()
     player.take_damage(enemy_dmg)
-    print("Enemy has attacked you for " + bcolors.BOLD + bcolors.FAIL + str(
-        enemy_dmg) + bcolors.ENDC + " points of damage.\nYour HEALTH POINTS: " + bcolors.BOLD + bcolors.FAIL + str(
-        player.get_hp()) + bcolors.ENDC)
+    print("Enemy has attacked you for " + bcolors.BOLD + bcolors.FAIL + str(enemy_dmg) + bcolors.ENDC + " points of damage.")
     print()
+
+    print("========================")
+    print("Enemy HP: " + bcolors.FAIL + str(enemy.get_hp()) + "/" + str(enemy.get_maxhp()) + bcolors.ENDC)
+    print("\nYour HP: " + bcolors.OKGREEN + str(player.get_hp()) + "/" + str(player.get_maxhp()) + bcolors.ENDC)
+    print("\nYour MP: " + bcolors.OKBLUE + str(player.get_mp()) + "/" + str(player.get_maxmp()) + bcolors.ENDC)
+
 
     if enemy.get_hp() == 0:
         print()
