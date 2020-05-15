@@ -1,4 +1,6 @@
 import random
+from classes.magic import Spell
+import pprint
 
 class bcolors:
     HEADER = '\033[95m'
@@ -26,16 +28,17 @@ class Person:  # class for the player as well as for the enemy
     def generate_damage(self):     # this generates the damage from the attack
         return random.randrange(self.atkl, self.atkh)
 
-    def generate_spell_damage(self, i):  # this generates damage from the spell bought
-        mgl = self.magic[i]["damage"] - 5
-        mgh = self.magic[i]["damage"] + 5
-        return random.randrange(mgl, mgh)
 
-    def take_damage(self, damage):    # this subtracts the damage from the health points
-        self.hp -= damage
+    def take_damage(self, dmg):    # this subtracts the damage from the health points
+        self.hp -= dmg
         if self.hp < 0:
             self.hp = 0
         return self.hp
+
+    def heal(self, dmg):        # this function will heal the player
+        self.hp += dmg
+        if self.hp > self.maxhp:
+            self.hp = self.maxhp
 
     def get_hp(self):         # gives us the health points that we are left with
         return self.hp
@@ -52,12 +55,6 @@ class Person:  # class for the player as well as for the enemy
     def reduce_mp(self, cost):   # subtracts the cost from the magic points
         self.mp -= cost
 
-    def get_spell_name(self, i):    # just gives the name of the spell
-        return self.magic[i]["name"]
-
-    def get_spell_mpcost(self, i):      # gets us the cost of buying a spell
-        return self.magic[i]["cost"]
-
     def choose_action(self):        # allows us to choose what to perform attack or magic spell
         i = 1
         print(bcolors.HEADER + bcolors.BOLD + "Actions" + bcolors.ENDC)
@@ -69,6 +66,6 @@ class Person:  # class for the player as well as for the enemy
         i = 1
         print(bcolors.HEADER + bcolors.BOLD + "Magic" + bcolors.ENDC)
         for spell in self.magic:
-            print(i,":", spell["name"], "(", "cost:", spell["cost"], ")")
+            print(i,":", spell.name, "(", "cost:", spell.cost, ")")
             i += 1
 
