@@ -24,7 +24,17 @@ grenade = Item("Grenade", "attack", "Deals 500 damage", 500)
 
 
 # DECLARATION OF THE PLAYERS
-player = Person(460, 65, 60, 39, [fire, thunder, blizzard, cure, cura], [potion, superpotin, hielixir, grenade])  # hp, mp, atk, df, magic
+player_spells = [fire, thunder, blizzard, cure, cura]
+
+player_items = [{"item": potion, "qty": 15},
+                {"item": hipotion, "qty": 5},
+                {"item": superpotin, "qty": 5},
+                {"item": elixir, "qty": 5},
+                {"item": hielixir, "qty": 2},
+                {"item": grenade, "qty": 5}]
+
+player = Person(460, 65, 60, 39, player_spells, player_items)  # hp, mp, atk, df, magic, items
+
 enemy = Person(1200, 50, 35, 25, [], [])
 
 running = True
@@ -51,6 +61,9 @@ while running:
         player.choose_magic()
         magic_choice = int(input("Choose magic spell: ")) - 1
 
+        if magic_choice == -1:
+            continue
+
         spell = player.magic[magic_choice]
         magic_dmg = spell.generate_damage()
 
@@ -71,7 +84,29 @@ while running:
 
     elif index == 2:
         player.choose_item()
+        item_choice = int(input("Choose item: ")) - 1
 
+        if item_choice == -1:
+            continue
+
+        item = player.items[item_choice]["item"]
+
+        if player.items[item_choice]["qty"] == 0:
+            print(bcolors.FAIL + "\nNone left......" + bcolors.ENDC)
+            continue
+
+        player.items[item_choice]["qty"] -= 1
+
+        if item.type == "potion":
+            player.heal(item.prop)
+            print("\n" + bcolors.OKGREEN + item.name + " heals for " + str(item.prop) + " HP" + bcolors.ENDC)
+        elif item.type == "elixir":
+            player.hp = player.maxhp
+            player.mp = player.maxmp
+            print("\n" + bcolors.OKGREEN + item.name + "Fully restores HP/MP" + bcolors.ENDC)
+        elif item.type == "attack":
+            enemy.take_damage(item.prop)
+            print("\n" + bcolors.FAIL + item.name + " deals " + str(item.prop) + " points of damage." + bcolors.ENDC)
 
 
     enemy_choice = 1

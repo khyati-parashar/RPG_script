@@ -1,6 +1,5 @@
 import random
-from classes.magic import Spell
-from classes.inventory import Item
+
 
 class bcolors:
     HEADER = '\033[95m'
@@ -60,19 +59,19 @@ class Person:  # class for the player as well as for the enemy
         i = 1
         print(bcolors.HEADER + bcolors.BOLD + "ACTIONS" + bcolors.ENDC)
         for item in self.actions:
-            print(i,":", item)
+            print("   " + str(i) + ":" + item)
             i += 1
 
     def choose_magic(self):             # allows us to choose which spell or magic to buy and gives their corresponding statistics
         i = 1
-        print(bcolors.HEADER + bcolors.BOLD + "MAGIC" + bcolors.ENDC)
+        print("\n" + bcolors.HEADER + bcolors.BOLD + "MAGIC" + bcolors.ENDC)
         for spell in self.magic:
-            print(i,":", spell.name, "(", "cost:", spell.cost, ")")
+            print("   " + str(i) + ":" + spell.name + "(cost:" + str(spell.cost) + ")")
             i += 1
 
     def choose_item(self):           # allows us to choose which item to buy and gives their corresponding statistics
         i = 1
-        print(bcolors.HEADER + bcolors.BOLD + "ITEMS" + bcolors.ENDC)
+        print("\n" + bcolors.HEADER + bcolors.BOLD + "ITEMS" + bcolors.ENDC)
         for item in self.items:
-            print(str(i) + " : " + item.name + " -> " + item.description + " (x5)")
+            print("   " + str(i) + " : " + item["item"].name + " -> " + item["item"].description + " (x" + str(item["qty"]) + ")")
             i += 1
