@@ -1,5 +1,6 @@
 from classes.game import bcolors, Person
 from classes.magic import Spell
+from classes.inventory import Item
 
 # BLACK MAGIC spells
 fire = Spell("Fire", 10, 100, "Black")
@@ -12,9 +13,19 @@ quake = Spell("Quake", 18, 180, "Black")
 cure = Spell("Cure", 12, 120, "White")
 cura = Spell("Cura", 18, 200, "White")
 
+# CREATE SOME ITEMS
+potion = Item("Potion", "potion", "Heals 50 HP", 50)
+hipotion = Item("Hi-Potion", "potion", "Heals 100 HP", 100)
+superpotin = Item("Super-Potion", "potion", "Heals 500 HP", 500)
+elixir = Item("Elixir", "elixir", "Fully restores HP/MP of one party member", 9999)
+hielixir = Item("Mega-Elixir", "elixir", "Fully restores part'HP/MP", 9999)
+
+grenade = Item("Grenade", "attack", "Deals 500 damage", 500)
+
+
 # DECLARATION OF THE PLAYERS
-player = Person(460, 65, 60, 39, [fire, thunder, blizzard, cure, cura])  # hp, mp, atk, df, magic
-enemy = Person(1200, 50, 35, 25, [])
+player = Person(460, 65, 60, 39, [fire, thunder, blizzard, cure, cura], [potion, superpotin, hielixir, grenade])  # hp, mp, atk, df, magic
+enemy = Person(1200, 50, 35, 25, [], [])
 
 running = True
 i = 0
@@ -57,6 +68,11 @@ while running:
         elif spell.type == "Black":
             enemy.take_damage(magic_dmg)
             print(bcolors.OKBLUE + "\n" + spell.name + " deals", str(magic_dmg), "points of damage" + bcolors.ENDC)
+
+    elif index == 2:
+        player.choose_item()
+
+
 
     enemy_choice = 1
 

@@ -1,6 +1,6 @@
 import random
 from classes.magic import Spell
-import pprint
+from classes.inventory import Item
 
 class bcolors:
     HEADER = '\033[95m'
@@ -14,7 +14,7 @@ class bcolors:
 
 
 class Person:  # class for the player as well as for the enemy
-    def __init__(self, hp, mp, atk, df, magic):
+    def __init__(self, hp, mp, atk, df, magic, items):
         self.maxhp = hp                             # hp = health points
         self.hp = hp
         self.maxmp = mp                             # mp = magic points
@@ -23,7 +23,8 @@ class Person:  # class for the player as well as for the enemy
         self.atkl = atk -10
         self.df = df                                # df = defence
         self.magic = magic
-        self.actions = ['Attack', 'Magic']
+        self.items = items
+        self.actions = ['Attack', 'Magic', 'Items']
 
     def generate_damage(self):     # this generates the damage from the attack
         return random.randrange(self.atkl, self.atkh)
@@ -57,15 +58,21 @@ class Person:  # class for the player as well as for the enemy
 
     def choose_action(self):        # allows us to choose what to perform attack or magic spell
         i = 1
-        print(bcolors.HEADER + bcolors.BOLD + "Actions" + bcolors.ENDC)
+        print(bcolors.HEADER + bcolors.BOLD + "ACTIONS" + bcolors.ENDC)
         for item in self.actions:
             print(i,":", item)
             i += 1
 
     def choose_magic(self):             # allows us to choose which spell or magic to buy and gives their corresponding statistics
         i = 1
-        print(bcolors.HEADER + bcolors.BOLD + "Magic" + bcolors.ENDC)
+        print(bcolors.HEADER + bcolors.BOLD + "MAGIC" + bcolors.ENDC)
         for spell in self.magic:
             print(i,":", spell.name, "(", "cost:", spell.cost, ")")
             i += 1
 
+    def choose_item(self):           # allows us to choose which item to buy and gives their corresponding statistics
+        i = 1
+        print(bcolors.HEADER + bcolors.BOLD + "ITEMS" + bcolors.ENDC)
+        for item in self.items:
+            print(str(i) + " : " + item.name + " -> " + item.description + " (x5)")
+            i += 1
