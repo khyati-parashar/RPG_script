@@ -10,10 +10,12 @@ class bcolors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+    CYAN = '\033[36m'
+    MAGENTA = '\033[35m'
 
 
 class Person:  # class for the player as well as for the enemy
-    def __init__(self, hp, mp, atk, df, magic, items):
+    def __init__(self, name, hp, mp, atk, df, magic, items):
         self.maxhp = hp                             # hp = health points
         self.hp = hp
         self.maxmp = mp                             # mp = magic points
@@ -24,6 +26,7 @@ class Person:  # class for the player as well as for the enemy
         self.magic = magic
         self.items = items
         self.actions = ['Attack', 'Magic', 'Items']
+        self.name = name
 
     def generate_damage(self):     # this generates the damage from the attack
         return random.randrange(self.atkl, self.atkh)
@@ -57,21 +60,74 @@ class Person:  # class for the player as well as for the enemy
 
     def choose_action(self):        # allows us to choose what to perform attack or magic spell
         i = 1
-        print(bcolors.HEADER + bcolors.BOLD + "ACTIONS" + bcolors.ENDC)
+        print("\n\t\t" + bcolors.BOLD + bcolors.WARNING + self.name+ "'s turn" + bcolors.ENDC)
+        print(bcolors.HEADER + bcolors.BOLD + "\tACTIONS" + bcolors.ENDC)
         for item in self.actions:
-            print("   " + str(i) + ":" + item)
+            print("\t\t" + str(i) + ":" + item)
             i += 1
 
     def choose_magic(self):             # allows us to choose which spell or magic to buy and gives their corresponding statistics
         i = 1
-        print("\n" + bcolors.HEADER + bcolors.BOLD + "MAGIC" + bcolors.ENDC)
+        print("\n\t\t" + bcolors.BOLD + bcolors.WARNING + self.name + "'s turn" + bcolors.ENDC)
+        print(bcolors.HEADER + bcolors.BOLD + "\tMAGIC" + bcolors.ENDC)
         for spell in self.magic:
-            print("   " + str(i) + ":" + spell.name + "(cost:" + str(spell.cost) + ")")
+            print("\t\t" + str(i) + ":" + spell.name + "(cost:" + str(spell.cost) + ")")
             i += 1
 
     def choose_item(self):           # allows us to choose which item to buy and gives their corresponding statistics
         i = 1
-        print("\n" + bcolors.HEADER + bcolors.BOLD + "ITEMS" + bcolors.ENDC)
+        print("\n\t\t" + bcolors.BOLD + bcolors.WARNING + self.name+ "'s turn" + bcolors.ENDC)
+        print(bcolors.HEADER + bcolors.BOLD + "\tITEMS" + bcolors.ENDC)
         for item in self.items:
-            print("   " + str(i) + " : " + item["item"].name + " -> " + item["item"].description + " (x" + str(item["qty"]) + ")")
+            print("\t\t" + str(i) + " : " + item["item"].name + " -> " + item["item"].description + " (x" + str(item["qty"]) + ")")
             i += 1
+
+    def get_status(self):
+        hp_bar = ""
+        bar_ticks = (self.hp / self.maxhp) * 100 / 4
+
+        mp_bar = ""
+        mp_ticks = (self.mp / self.maxmp) * 100 / 10
+
+        while bar_ticks > 0:
+            hp_bar += "█"
+            bar_ticks -= 1
+        while len(hp_bar) < 25:
+            hp_bar += " "
+
+        while mp_ticks > 0:
+            mp_bar += "█"
+            mp_ticks -= 1
+        while len(mp_bar) < 10:
+            mp_bar += " "
+
+        hp_string = str(self.hp) + "/" + str(self.maxhp)
+        current_hp = ""
+
+        if len(hp_string) < 9:
+            decreased = 9 - len(hp_string)
+            while decreased > 0:
+                current_hp += " "
+                decreased -= 1
+            current_hp += hp_string
+        else:
+            current_hp = hp_string
+
+        mp_string = str(self.mp) + "/" + str(self.maxmp)
+        current_mp = ""
+
+        if len(mp_string) < 7:
+            decreased = 7 - len(hp_string)
+            while decreased > 0:
+                current_mp += " "
+                decreased -= 1
+            current_mp += mp_string
+        else:
+            current_mp = mp_string
+
+
+        print("                          _________________________                        __________")
+        print(self.name + ":        " + current_hp + " |" + bcolors.CYAN + hp_bar + bcolors.ENDC + "|              " + current_mp + " |" + bcolors.MAGENTA + mp_bar + bcolors.ENDC + "|")
+
+
+
