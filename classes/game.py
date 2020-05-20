@@ -12,6 +12,7 @@ class bcolors:
     UNDERLINE = '\033[4m'
     CYAN = '\033[36m'
     MAGENTA = '\033[35m'
+    ORANGE = '\033[33m'
 
 
 class Person:  # class for the player as well as for the enemy
@@ -58,6 +59,17 @@ class Person:  # class for the player as well as for the enemy
     def reduce_mp(self, cost):   # subtracts the cost from the magic points
         self.mp -= cost
 
+    def choose_target(self, enemies):
+        i = 1
+        print("\n" + bcolors.FAIL + bcolors.BOLD + "\tTRAGET" + bcolors.ENDC)
+
+        for devil in enemies:
+            if devil.get_hp() != 0:
+                print("\t\t" + str(i) + ":" + devil.name)
+                i += 1
+        ans = int(input("\t" + bcolors.CYAN + "Choose your target: " + bcolors.ENDC)) - 1
+        return ans
+
     def choose_action(self):        # allows us to choose what to perform attack or magic spell
         i = 1
         print("\n\t\t" + bcolors.BOLD + bcolors.WARNING + self.name+ "'s turn" + bcolors.ENDC)
@@ -81,6 +93,31 @@ class Person:  # class for the player as well as for the enemy
         for item in self.items:
             print("\t\t" + str(i) + " : " + item["item"].name + " -> " + item["item"].description + " (x" + str(item["qty"]) + ")")
             i += 1
+
+    def get_enemy_status(self):
+        hp_bar = ""
+        bar_ticks = (self.hp / self.maxhp) * 100 / 2
+
+        while bar_ticks > 0:
+            hp_bar += "█"
+            bar_ticks -= 1
+        while len(hp_bar) < 50:
+            hp_bar += " "
+
+        hp_string = str(self.hp) + "/" + str(self.maxhp)
+        current_hp = ""
+
+        if len(hp_string) < 11:
+            decreased = 11 - len(hp_string)
+            while decreased > 0:
+                current_hp += " "
+                decreased -= 1
+            current_hp += hp_string
+        else:
+            current_hp = hp_string
+
+        print("                             __________________________________________________")
+        print(self.name + ":        " + current_hp + " |" + bcolors.ORANGE + hp_bar + bcolors.ENDC + "|")
 
     def get_status(self):
         hp_bar = ""
