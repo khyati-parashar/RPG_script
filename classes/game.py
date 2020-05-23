@@ -72,7 +72,7 @@ class Person:  # class for the player as well as for the enemy
 
     def choose_action(self):        # allows us to choose what to perform attack or magic spell
         i = 1
-        print("\n\t\t" + bcolors.BOLD + bcolors.WARNING + self.name+ "'s turn" + bcolors.ENDC)
+        print("\n\t\t" + bcolors.BOLD + bcolors.WARNING + self.name + "'s turn" + bcolors.ENDC)
         print(bcolors.HEADER + bcolors.BOLD + "\tACTIONS" + bcolors.ENDC)
         for item in self.actions:
             print("\t\t" + str(i) + ":" + item)
@@ -154,7 +154,7 @@ class Person:  # class for the player as well as for the enemy
         current_mp = ""
 
         if len(mp_string) < 7:
-            decreased = 7 - len(hp_string)
+            decreased = 7 - len(mp_string)
             while decreased > 0:
                 current_mp += " "
                 decreased -= 1
