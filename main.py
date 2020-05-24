@@ -5,24 +5,24 @@ import random
 
 
 # BLACK MAGIC spells
-fire = Spell("Fire", 25, 600, "Black")
-thunder = Spell("Thunder", 25, 620, "Black")
-blizzard = Spell("Blizzard", 25, 640, "Black")
-meteor = Spell("Meteor", 30, 760, "Black")
-quake = Spell("Quake", 38, 780, "Black")
+fire = Spell(name = "Fire", cost = 25, dmg = 600, type = "Black")
+thunder = Spell(name = "Thunder", cost = 25, dmg = 620, type = "Black")
+blizzard = Spell(name ="Blizzard", cost = 25, dmg = 640, type = "Black")
+meteor = Spell(name = "Meteor", cost = 30, dmg = 760, type = "Black")
+quake = Spell(name = "Quake", cost = 38, dmg = 780, type = "Black")
 
 # WHITE MAGIC spells
-cure = Spell("Cure", 25, 1200, "White")
-cura = Spell("Cura", 40, 2000, "White")
+heal = Spell(name = "Cure", cost = 25, dmg  = 1200, type = "White")
+cure = Spell(name = "Cura", cost = 40, dmg = 2000, type = "White")
 
 # CREATE SOME ITEMS
-potion = Item("Potion", "potion", "Heals 50 HP", 50)
-hipotion = Item("Hi-Potion", "potion", "Heals 100 HP", 100)
-superpotin = Item("Super-Potion", "potion", "Heals 500 HP", 1000)
-elixir = Item("Elixir", "elixir", "Fully restores HP/MP of one party member", 9999)
-hielixir = Item("Mega-Elixir", "elixir", "Fully restores party's HP/MP", 9999)
+potion = Item(name = "Potion", type = "potion", description = "Heals 50 HP", prop = 50)
+hipotion = Item(name = "Hi-Potion", type = "potion", description = "Heals 100 HP", prop = 100)
+superpotin = Item(name = "Super-Potion", type = "potion", description = "Heals 500 HP", prop = 1000)
+elixir = Item(name = "Elixir", type = "elixir", description = "Fully restores HP/MP of one party member", prop = 9999)
+hielixir = Item(name = "Mega-Elixir", type = "elixir", description = "Fully restores party's HP/MP", prop = 9999)
 
-grenade = Item("Grenade", "attack", "Deals 5000 damage", 5000)
+grenade = Item(name = "Grenade", type = "attack", description = "Deals 800 damage", prop = 800)
 
 
 # DECLARATION OF THE PLAYERS
@@ -38,15 +38,15 @@ player_items = [{"item": potion, "qty": 15},
                 {"item": grenade, "qty": 5}]
 
 # MULTI-PLAYER DECLARATION
-player1 = Person("Khyati", 5234, 150, 400, 34, player_spells, player_items)  # hp, mp, atk, df, magic, items
-player2 = Person("Himani", 3440, 350, 333, 34, player_spells, player_items)
-player3 = Person("Saumya", 6460, 100, 558, 34, player_spells, player_items)
+player1 = Person(name = "Khyati", hp = 5234, mp = 150, atk = 400, df = 34, magic = player_spells, items = player_items)  # name, hp, mp, atk, df, magic, items
+player2 = Person(name = "Himani", hp = 3440, mp = 350, atk = 333, df = 34, magic = player_spells, items = player_items)
+player3 = Person(name = "Saumya", hp = 6460, mp = 100, atk = 558, df = 34, magic = player_spells, items = player_items)
 
 players = [player1, player2, player3]
 
-enemy1 = Person("Witcher", 18200, 300, 5300, 525, enemy_spells, [])
-enemy2 = Person("Magus  ", 1250, 250, 6500, 25, enemy_spells, [])
-enemy3 = Person("Serpent", 1550, 351, 4300, 425, enemy_spells, [])
+enemy1 = Person(name = "Witcher", hp = 18200, mp = 300, atk = 530, df = 525, magic = enemy_spells, items = [])
+enemy2 = Person(name = "Magus  ", hp = 1250, mp = 250, atk = 650, df = 25, magic = enemy_spells, items = [])
+enemy3 = Person(name = "Serpent", hp = 1550, mp = 351, atk = 430, df = 425, magic = enemy_spells, items = [])
 
 enemies = [enemy2, enemy1, enemy3]
 
