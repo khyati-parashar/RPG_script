@@ -26,9 +26,9 @@ grenade = Item(name = "Grenade", type = "attack", description = "Deals 800 damag
 
 
 # DECLARATION OF THE PLAYERS
-player_spells = [meteor, quake, blizzard, cure, cura]
+player_spells = [meteor, quake, blizzard, cure, heal]
 
-enemy_spells = [fire, meteor, thunder, cure]
+enemy_spells = [fire, meteor, thunder, heal]
 
 player_items = [{"item": potion, "qty": 15},
                 {"item": hipotion, "qty": 5},
