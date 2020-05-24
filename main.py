@@ -12,8 +12,8 @@ meteor = Spell(name = "Meteor", cost = 30, dmg = 760, type = "Black")
 quake = Spell(name = "Quake", cost = 38, dmg = 780, type = "Black")
 
 # WHITE MAGIC spells
-heal = Spell(name = "Cure", cost = 25, dmg  = 1200, type = "White")
-cure = Spell(name = "Cura", cost = 40, dmg = 2000, type = "White")
+heal = Spell(name = "Heal", cost = 25, dmg  = 1200, type = "White")
+cure = Spell(name = "Cure", cost = 40, dmg = 2000, type = "White")
 
 # CREATE SOME ITEMS
 potion = Item(name = "Potion", type = "potion", description = "Heals 50 HP", prop = 50)
